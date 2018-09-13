@@ -36,7 +36,12 @@ namespace NetDiscover
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            using (var sr = new StreamReader("./mac-vendor.csv"))
+            using (var csv = new CsvReader(sr))
+            {
+                csv.Configuration.HasHeaderRecord = false;
+                fabs = csv.GetRecords<fabricantes>().ToList();
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -45,19 +50,12 @@ namespace NetDiscover
         }
         private void ScanButton_Click(object sender, EventArgs e)
         {
-            /* Carrega o CSV com os fabricantes em uma lista de objetos */
-            using (var sr = new StreamReader("./mac-vendor.csv"))
-            using (var csv = new CsvReader(sr))
-            {
-                csv.Configuration.HasHeaderRecord = false;
-                fabs = csv.GetRecords<fabricantes>().ToList();
-            }
             using (var win = new Form3())
             {
                 var result = win.ShowDialog();
                 if (result == DialogResult.OK)
-                { 
-                   Int32.TryParse(win.ReturnValue1,out selec);
+                {
+                    Int32.TryParse(win.ReturnValue1, out selec);
                 }
             }
             //Obtém as propriedades do adaptador de rede
@@ -272,7 +270,6 @@ namespace NetDiscover
                     inicio[0]++;
                 }
             }
-            MessageBox.Show(lista[1780].ip.ToString());
             PingAsync();
             ////////////////////////////////////////////
         }
