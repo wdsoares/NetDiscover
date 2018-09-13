@@ -270,7 +270,7 @@ namespace NetDiscover
                     inicio[0]++;
                 }
             }
-            PingAsync();
+            //PingAsync();
             ////////////////////////////////////////////
         }
 
