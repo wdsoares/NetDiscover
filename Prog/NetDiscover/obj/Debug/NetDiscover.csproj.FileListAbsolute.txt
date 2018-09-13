@@ -12,3 +12,6 @@ D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\N
 D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\obj\Debug\NetDiscover.csproj.GenerateResource.Cache
 D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\obj\Debug\NetDiscover.exe
 D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\obj\Debug\NetDiscover.pdb
+D:\Arquivos do Usuario\Meus Documentos\GitHub\NetDiscover\Prog\NetDiscover\bin\Debug\NetDiscover.exe.config
+D:\Arquivos do Usuario\Meus Documentos\GitHub\NetDiscover\Prog\NetDiscover\obj\Debug\NetDiscover.exe
+D:\Arquivos do Usuario\Meus Documentos\GitHub\NetDiscover\Prog\NetDiscover\obj\Debug\NetDiscover.pdb
