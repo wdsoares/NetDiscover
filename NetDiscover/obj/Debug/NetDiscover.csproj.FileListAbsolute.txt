@@ -1,0 +1,14 @@
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\bin\Debug\NetDiscover.exe.config
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\bin\Debug\NetDiscover.exe
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\bin\Debug\NetDiscover.pdb
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\bin\Debug\CsvHelper.dll
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\bin\Debug\CsvHelper.xml
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\obj\Debug\NetDiscover.csprojResolveAssemblyReference.cache
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\obj\Debug\NetDiscover.Form1.resources
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\obj\Debug\NetDiscover.Form3.resources
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\obj\Debug\NetDiscover.Form4.resources
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\obj\Debug\NetDiscover.Form5.resources
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\obj\Debug\NetDiscover.Properties.Resources.resources
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\obj\Debug\NetDiscover.csproj.GenerateResource.Cache
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\obj\Debug\NetDiscover.exe
+D:\Arquivos do Usuario\Meus Documentos\Visual Studio 2012\Projects\NetDiscover\NetDiscover\obj\Debug\NetDiscover.pdb
