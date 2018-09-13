@@ -276,7 +276,7 @@ namespace NetDiscover
 
         public async void PingAsync()
         {
-            var tasks = lista.Select(ips => new Ping().SendPingAsync(ips.ip.ToString(), 10000));
+            var tasks = lista.Select(ips => new Ping().SendPingAsync(ips.ip.ToString(), 2000));
             var results = await Task.WhenAll(tasks);
         }
 
