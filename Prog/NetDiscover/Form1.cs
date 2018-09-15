@@ -17,8 +17,12 @@ using System.Text.RegularExpressions;
 using UITimer = System.Windows.Forms.Timer;
 
 
+/* ÃÃÃÃÃNNNHHH ÕÕÕÕÕNNNHHH HÕÃÃÃÃNNNN HÃÃÃÕÕNNNN 
+    vose caiu no gemidao do ce charpi
+ * 
+ * APOSKAOPKSPOAKSPOAKSOPAKSPOKASOPKAPOSKOPAKS
+ */
 
-//Fiz tudo no mesmo método e tô nem aí.
 namespace NetDiscover
 {
     public partial class Form1 : Form
@@ -30,6 +34,7 @@ namespace NetDiscover
         IPAddress faixaini, faixafim;
         List<fabricantes> fabs;
         List<listaip> lista = new List<listaip>();
+
         public Form1()
         {
             InitializeComponent();
@@ -48,10 +53,6 @@ namespace NetDiscover
             dataGridView1.MultiSelect = false;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
         private void ScanButton_Click(object sender, EventArgs e)
         {
             tick = 0;
@@ -88,9 +89,6 @@ namespace NetDiscover
                 pref = UnicatIPInfo.PrefixLength;
                 pre_label.Visible = true;
             }
-
-
-
             //////////////////////////////////////////////////////////////////////////////////////////
             //Obtém o IP da rede e faixa inicial da rede
             //Endereço IP
@@ -139,11 +137,6 @@ namespace NetDiscover
             {
                 ip_ini[k] = Convert.ToString(ini[k], 2).PadLeft(8,'0');
             }
-            
-
-
-
-
             ////////////////////////////////////////////
             // Transfere o array de string ip_ini para uma string
             string ipini = string.Empty;
@@ -193,8 +186,6 @@ namespace NetDiscover
                 }
             }
             //////////////////////////////////////////////
-
-
             IPAddress ipfinal = IPAddress.Parse(ipp);
             faixafim = ipfinal;
             ini_label.Text = ipini;
@@ -238,7 +229,7 @@ namespace NetDiscover
             totalend_label.Text = faixatotal.ToString();
             totalend_label.Visible = true;
             /////////////////////////////////////////////////
-            ////////////////////////////////////////////
+            /////////////////////////////////////////////////
             // Cria lista de endereços disponíveis
             Byte[] inicio = ipa.GetAddressBytes();
             inicio[3]++;
@@ -303,16 +294,6 @@ namespace NetDiscover
             var results = await Task.WhenAll(tasks);
         }
 
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
         public string getMacByIp(string ip)
         {
             var macIpPairs = ArpA(faixaini.ToString(),faixafim.ToString());
@@ -356,6 +337,7 @@ namespace NetDiscover
             }
             return mip;            
         }
+
         public string acha_fab(string mac, List<fabricantes>lista)
         {
             foreach (var item in lista)
@@ -367,6 +349,7 @@ namespace NetDiscover
             }
             return "NÃO ENCONTRADO";   
         }
+
         public struct MacIpPair
         {
             public string IP { get; set; }
@@ -416,8 +399,6 @@ namespace NetDiscover
             fetchlist();
         }
 
-
-
         public void InitTimer2()
         {
             timer2 = new UITimer();
@@ -433,8 +414,6 @@ namespace NetDiscover
         {
             PingAsync();
         }
-
-
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -463,6 +442,7 @@ namespace NetDiscover
 
         }
     }
+
     public struct listaip
     {
         public IPAddress ip { get; set; }

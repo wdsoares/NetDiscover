@@ -75,7 +75,6 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // SelectInterface_Button
             // 
@@ -98,7 +97,6 @@
             // 
             resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // interface_label
             // 
@@ -124,7 +122,6 @@
             // 
             resources.ApplyResources(this.pre_label, "pre_label");
             this.pre_label.Name = "pre_label";
-            this.pre_label.Click += new System.EventHandler(this.label4_Click);
             // 
             // label4
             // 
