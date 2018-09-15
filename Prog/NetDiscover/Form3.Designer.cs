@@ -70,6 +70,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBox1);
             this.Name = "Form3";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Selecionar Interface";
             this.Load += new System.EventHandler(this.Form3_Load);
             this.ResumeLayout(false);
