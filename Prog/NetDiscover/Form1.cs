@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Diagnostics;
 using CsvHelper;
 using System.IO;
 using System.Text.RegularExpressions;
+using UITimer = System.Windows.Forms.Timer;
+
 
 
 //Fiz tudo no mesmo método e tô nem aí.
@@ -22,7 +23,8 @@ namespace NetDiscover
 {
     public partial class Form1 : Form
     {
-        int selec = 0;
+        private UITimer timer1, timer2; 
+        int selec = 0,tick = 0;
         string interf, subn, ips;
         int pref;
         IPAddress faixaini, faixafim;
@@ -42,6 +44,8 @@ namespace NetDiscover
                 csv.Configuration.HasHeaderRecord = false;
                 fabs = csv.GetRecords<fabricantes>().ToList();
             }
+            dataGridView1.ReadOnly = true;
+            dataGridView1.MultiSelect = false;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -50,6 +54,12 @@ namespace NetDiscover
         }
         private void ScanButton_Click(object sender, EventArgs e)
         {
+            tick = 0;
+            if (Convert.ToInt32(textBox1.Text) < 500)
+            {
+                MessageBox.Show("Insira um valor acima de 500ms!");
+                return;
+            }
             using (var win = new Form3())
             {
                 var result = win.ShowDialog();
@@ -270,13 +280,26 @@ namespace NetDiscover
                     inicio[0]++;
                 }
             }
-            //PingAsync();
+            InitTimer2();
+            InitTimer(Convert.ToInt32(textBox1.Text));
             ////////////////////////////////////////////
+        }
+
+        public void fetchlist()
+        {
+            List<MacIpPair> listaa = ArpA(faixaini.ToString(), faixafim.ToString());
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = listaa;
+            dataGridView1.Columns[2].Width = 290;
+            totaldisp_label.Text = dataGridView1.RowCount.ToString();
+            totaldisp_label.Visible = true;
         }
 
         public async void PingAsync()
         {
-            var tasks = lista.Select(ips => new Ping().SendPingAsync(ips.ip.ToString(), 2000));
+            string data = "aaaaaaaaaaaaaaaa";
+            byte[] buffer = Encoding.ASCII.GetBytes(data);
+            var tasks = lista.Select(ips => new Ping().SendPingAsync(ips.ip.ToString(), 2000,buffer));
             var results = await Task.WhenAll(tasks);
         }
 
@@ -290,26 +313,9 @@ namespace NetDiscover
 
         }
 
-        private void Scan_Button_Click(object sender, EventArgs e)
-        {
-            if (ini_label.Visible == true)
-            {
-                List<MacIpPair> lista = GetAllMacAddressesAndIppairs(faixaini.ToString(), faixafim.ToString());
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = lista;
-                dataGridView1.Columns[2].Width = 290;
-                totaldisp_label.Text = dataGridView1.RowCount.ToString();
-                totaldisp_label.Visible = true;
-            }
-            else
-            {
-                MessageBox.Show("Selecione a interface antes de escanear!");
-            }
-        }
-
         public string getMacByIp(string ip)
         {
-            var macIpPairs = GetAllMacAddressesAndIppairs(faixaini.ToString(),faixafim.ToString());
+            var macIpPairs = ArpA(faixaini.ToString(),faixafim.ToString());
             int index = macIpPairs.FindIndex(x => x.IP == ip);
             if (index >= 0)
             {
@@ -321,7 +327,8 @@ namespace NetDiscover
             }
         }
 
-        public List<MacIpPair> GetAllMacAddressesAndIppairs(string ini, string fim)
+        //ArpA = Executa comando arp -a para coletar MAC
+        public List<MacIpPair> ArpA(string ini, string fim)
         {
             List<MacIpPair> mip = new List<MacIpPair>();
             System.Diagnostics.Process pProcess = new System.Diagnostics.Process();
@@ -390,6 +397,60 @@ namespace NetDiscover
                 }
             }
         }
+
+        public void InitTimer(int tempo)
+        {
+            timer1 = new UITimer();
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Interval = tempo; // in miliseconds
+            timer1.Start();
+            varredura_label.Text = tick.ToString();
+            varredura_label.Visible = true;
+            button1.Visible = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            tick++;
+            varredura_label.Text = tick.ToString();
+            fetchlist();
+        }
+
+
+
+        public void InitTimer2()
+        {
+            timer2 = new UITimer();
+            timer2.Tick += new EventHandler(timer2_Tick);
+            timer2.Interval = 3000; // in miliseconds
+            timer2.Start();
+            varredura_label.Text = tick.ToString();
+            varredura_label.Visible = true;
+            button1.Visible = true;
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            PingAsync();
+        }
+
+
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(textBox1.Text, "[^0-9]"))
+            {
+                MessageBox.Show("Por favor, insira somente números");
+                textBox1.Text = textBox1.Text.Remove(textBox1.Text.Length - 1);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            button1.Visible = false;
+            timer1.Stop();
+        }
+
     }
 
     public class fabricantes
