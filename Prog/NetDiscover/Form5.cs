@@ -38,15 +38,11 @@ namespace NetDiscover
             dataGridView1.Columns[1].Width = 300;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
      public class fabricantes_listagem
     {
-        public string cods { get; set; }
-        public string fabs { get; set; }
+        public string MAC { get; set; }
+        public string Fabricante { get; set; }
 
         public fabricantes_listagem()
         {

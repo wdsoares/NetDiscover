@@ -18,8 +18,7 @@ using UITimer = System.Windows.Forms.Timer;
 
 
 /* ÃÃÃÃÃNNNHHH ÕÕÕÕÕNNNHHH HÕÃÃÃÃNNNN HÃÃÃÕÕNNNN 
-    vose caiu no gemidao do ce charpi
- * 
+    vose caiu no gemidaum do ce charpi
  * APOSKAOPKSPOAKSPOAKSOPAKSPOKASOPKAPOSKOPAKS
  */
 
@@ -34,11 +33,11 @@ namespace NetDiscover
         IPAddress faixaini, faixafim;
         List<fabricantes> fabs;
         List<listaip> lista = new List<listaip>();
+        List<MacIpPair> matches = new List<MacIpPair>();
 
         public Form1()
         {
             InitializeComponent();
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -247,7 +246,7 @@ namespace NetDiscover
                 }
                 lista.Add(new listaip()
                     {
-                        ip = IPAddress.Parse(novo)
+                        ip = IPAddress.Parse(novo),
                     }
                          );
                 i3++;
@@ -279,9 +278,16 @@ namespace NetDiscover
         public void fetchlist()
         {
             List<MacIpPair> listaa = ArpA(faixaini.ToString(), faixafim.ToString());
+            foreach (MacIpPair i in listaa)
+            {
+                if (!matches.Any(x => x.MAC == i.MAC))
+                {
+                    matches.Add(i);
+                }
+            }
             dataGridView1.DataSource = null;
-            dataGridView1.DataSource = listaa;
-            dataGridView1.Columns[2].Width = 290;
+            dataGridView1.DataSource = matches;
+            dataGridView1.Columns[2].Width = 140;
             totaldisp_label.Text = dataGridView1.RowCount.ToString();
             totaldisp_label.Visible = true;
         }
@@ -330,7 +336,8 @@ namespace NetDiscover
                     {
                         MAC = m.Groups["mac"].Value,
                         IP = m.Groups["ip"].Value,
-                        Fabricante = acha_fab(m.Groups["mac"].Value, fabs)
+                        Fabricante = acha_fab(m.Groups["mac"].Value, fabs),
+                        Data = DateTime.Now
 
                     });  
                 }
@@ -355,6 +362,7 @@ namespace NetDiscover
             public string IP { get; set; }
             public string MAC { get; set; }
             public string Fabricante { get; set; }
+            public DateTime Data { get; set; }
         }
 
         private void consultarBancoDeDadosDeFabricantesToolStripMenuItem_Click(object sender, EventArgs e)
