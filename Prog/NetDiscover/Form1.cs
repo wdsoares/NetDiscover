@@ -40,6 +40,7 @@ namespace NetDiscover
             InitializeComponent();
         }
 
+        //Ao iniciar, cria uma lista com todos os fabricantes e macs disponíveis, e carrega o histórico da sessão anterior
         private void Form1_Load(object sender, EventArgs e)
         {
             using (var sr = new StreamReader("./mac-vendor.csv"))
@@ -48,10 +49,48 @@ namespace NetDiscover
                 csv.Configuration.HasHeaderRecord = false;
                 fabs = csv.GetRecords<fabricantes>().ToList();
             }
+            using (var srs = new StreamReader("./addresses.csv"))
+            using (var csvs = new CsvReader(srs))
+            {
+                csvs.Configuration.HasHeaderRecord = true;
+                matches = csvs.GetRecords<MacIpPair>().ToList();
+            }
+
+            List<MacIpPair> nova = new List<MacIpPair>();
+            foreach(var i in matches)
+            {
+                MacIpPair novo = i;
+                novo.Status = "Offline";
+                nova.Add(novo);
+            }
+            matches = nova;
             dataGridView1.ReadOnly = true;
             dataGridView1.MultiSelect = false;
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = matches;
+            dataGridView1.Columns[2].Width = 140;
+            totaldisp_label.Text = dataGridView1.RowCount.ToString();
+            totaldisp_label.Visible = true;
         }
-
+        //Cria arquivo com os registros da busca
+        public void updatestatus()
+        {
+            try
+            {
+                using (var txtWriter = new StreamWriter(@"./addresses.csv"))
+                {
+                    var writer = new CsvWriter(txtWriter);
+                    writer.Configuration.Delimiter = ",";
+                    writer.WriteRecords(matches);
+                }
+                MessageBox.Show("Sucesso!");
+            }
+            catch
+            {
+                MessageBox.Show("Não foi possível criar/acessar o arquivo, execute o aplicativo como administrador!");
+            }
+        }
+        
         private void ScanButton_Click(object sender, EventArgs e)
         {
             tick = 0;
@@ -270,8 +309,20 @@ namespace NetDiscover
                     inicio[0]++;
                 }
             }
-            InitTimer2();
-            InitTimer(Convert.ToInt32(textBox1.Text));
+
+            //Confirmação para grande números de endereços
+            if (MessageBox.Show("ATENÇÃO!" + Environment.NewLine + "Escaneamentos com mais de 8192 endereços podem levar a travamentos e crashs no sistema, continuar?"
+                , "Confirmar ação",
+               MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+               MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+            {
+                InitTimer2();
+                InitTimer(Convert.ToInt32(textBox1.Text));
+            }
+            else
+            {
+                return;
+            }
             ////////////////////////////////////////////
         }
 
@@ -280,9 +331,19 @@ namespace NetDiscover
             List<MacIpPair> listaa = ArpA(faixaini.ToString(), faixafim.ToString());
             foreach (MacIpPair i in listaa)
             {
-                if (!matches.Any(x => x.MAC == i.MAC))
+                if (!matches.Exists(x => x.MAC == i.MAC))
                 {
                     matches.Add(i);
+                }
+                for (int ik = 0; ik < matches.Count; ik++ )
+                {
+                    if (matches[ik].Status == "Offline" && matches[ik].MAC == i.MAC)
+                    {
+                        MacIpPair novo = i;
+                        novo.Status = "Online";
+                        matches.Remove(matches[ik]);
+                        matches.Add(novo);
+                    }
                 }
             }
             dataGridView1.DataSource = null;
@@ -296,7 +357,7 @@ namespace NetDiscover
         {
             string data = "aaaaaaaaaaaaaaaa";
             byte[] buffer = Encoding.ASCII.GetBytes(data);
-            var tasks = lista.Select(ips => new Ping().SendPingAsync(ips.ip.ToString(), 2000,buffer));
+            var tasks = lista.Select(ips => new Ping().SendPingAsync(ips.ip.ToString(), 600,buffer));
             var results = await Task.WhenAll(tasks);
         }
 
@@ -337,7 +398,8 @@ namespace NetDiscover
                         MAC = m.Groups["mac"].Value,
                         IP = m.Groups["ip"].Value,
                         Fabricante = acha_fab(m.Groups["mac"].Value, fabs),
-                        Data = DateTime.Now
+                        Data = DateTime.Now,
+                        Status = "Novo"
 
                     });  
                 }
@@ -363,6 +425,7 @@ namespace NetDiscover
             public string MAC { get; set; }
             public string Fabricante { get; set; }
             public DateTime Data { get; set; }
+            public string Status { get; set; }
         }
 
         private void consultarBancoDeDadosDeFabricantesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -404,6 +467,8 @@ namespace NetDiscover
         {
             tick++;
             varredura_label.Text = tick.ToString();
+            dataGridView1.Update();
+            dataGridView1.Refresh();
             fetchlist();
         }
 
@@ -436,6 +501,18 @@ namespace NetDiscover
         {
             button1.Visible = false;
             timer1.Stop();
+            timer2.Stop();
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            updatestatus();
+        }
+
+        private void enter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                SelectInterface_Button.PerformClick();
         }
 
     }

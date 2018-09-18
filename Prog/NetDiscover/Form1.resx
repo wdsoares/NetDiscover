@@ -590,6 +590,36 @@
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="saveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="saveToolStripMenuItem.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="filesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>42, 20</value>
+  </data>
+  <data name="filesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="consultarBancoDeDadosDeFabricantesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 22</value>
+  </data>
+  <data name="consultarBancoDeDadosDeFabricantesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Consultar Banco de dados de fabricantes</value>
+  </data>
+  <data name="listarFabricantesEMACsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 22</value>
+  </data>
+  <data name="listarFabricantesEMACsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Listar Fabricantes e MAC's</value>
+  </data>
+  <data name="miscToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="miscToolStripMenuItem.Text" xml:space="preserve">
+    <value>Misc</value>
+  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -613,24 +643,6 @@
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>26</value>
-  </data>
-  <data name="miscToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="miscToolStripMenuItem.Text" xml:space="preserve">
-    <value>Misc</value>
-  </data>
-  <data name="consultarBancoDeDadosDeFabricantesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 22</value>
-  </data>
-  <data name="consultarBancoDeDadosDeFabricantesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Consultar Banco de dados de fabricantes</value>
-  </data>
-  <data name="listarFabricantesEMACsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 22</value>
-  </data>
-  <data name="listarFabricantesEMACsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Listar Fabricantes e MAC's</value>
   </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -819,7 +831,7 @@
     <value>25</value>
   </data>
   <data name="textBox1.Text" xml:space="preserve">
-    <value>0</value>
+    <value>500</value>
   </data>
   <data name="&gt;&gt;textBox1.Name" xml:space="preserve">
     <value>textBox1</value>
@@ -2087,6 +2099,18 @@
     <value>listarFabricantesEMACsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;listarFabricantesEMACsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;filesToolStripMenuItem.Name" xml:space="preserve">
+    <value>filesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;filesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;saveToolStripMenuItem.Name" xml:space="preserve">
+    <value>saveToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;saveToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
