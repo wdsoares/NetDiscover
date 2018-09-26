@@ -1,4 +1,4 @@
 # NetDiscover
-## Autor: Willian D. Soares
+## Autores: Willian D. Soares, Marcelo Prates, Jean Rodrigues
 
 Linguagem: C#
